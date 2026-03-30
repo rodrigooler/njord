@@ -28,7 +28,7 @@ This project follows a code of conduct to ensure a welcoming environment. See [C
 ### Setup
 
 ```bash
-git clone https://github.com/yourusername/njord.git
+git clone https://github.com/rodrigooler/njord.git
 cd njord
 cargo build
 cargo test

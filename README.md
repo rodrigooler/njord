@@ -1,6 +1,6 @@
 # Njord
 
-[![Build Status](https://github.com/yourusername/njord/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/njord/actions)
+[![Build Status](https://github.com/rodrigooler/njord/actions/workflows/ci.yml/badge.svg)](https://github.com/rodrigooler/njord/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Rust](https://img.shields.io/badge/rust-1.70%2B-blue.svg)](https://www.rust-lang.org/)
 
@@ -49,7 +49,7 @@ The monitor checks network path status:
 ### Build from Source
 
 ```bash
-git clone https://github.com/yourusername/njord.git
+git clone https://github.com/rodrigooler/njord.git
 cd njord
 cargo build --release
 ```
