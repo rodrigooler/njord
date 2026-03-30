@@ -1,6 +1,5 @@
 # Njord
 
-[![Build Status](https://github.com/rodrigooler/njord/actions/workflows/ci.yml/badge.svg)](https://github.com/rodrigooler/njord/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Rust](https://img.shields.io/badge/rust-1.70%2B-blue.svg)](https://www.rust-lang.org/)
 
