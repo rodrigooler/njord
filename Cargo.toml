@@ -1,0 +1,13 @@
+[package]
+name = "njord"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+notify-rust = "4"
+tao = { version = "0.16", features = ["tray"] }
+tokio = { version = "1", features = ["full"] }
+reqwest = { version = "0.11", features = ["json"] }
+[target.'cfg(target_os = "macos")'.dependencies]
+system-configuration = "0.5"
+core-foundation = "0.9"
