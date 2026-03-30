@@ -7,6 +7,8 @@ use tao::system_tray::{Icon, SystemTrayBuilder};
 use tokio::runtime::Runtime;
 use tokio::time::{Duration, sleep};
 
+const MONITORING_INTERVAL_SECS: u64 = 30;
+
 fn main() {
     let event_loop = EventLoop::new();
 
@@ -28,7 +30,7 @@ fn main() {
         loop {
             let connected = check_connectivity().await;
             {
-                let mut conn = is_connected_clone.lock().unwrap();
+                let mut conn = is_connected_clone.lock().expect("Failed to acquire mutex lock");
                 if *conn != connected {
                     *conn = connected;
                     let summary = if connected {
@@ -43,21 +45,18 @@ fn main() {
                         .unwrap();
                 }
             }
-            sleep(Duration::from_secs(30)).await;
+            sleep(Duration::from_secs(MONITORING_INTERVAL_SECS)).await;
         }
     });
 
     event_loop.run(move |event, _, control_flow| {
         *control_flow = ControlFlow::Wait;
 
-        match event {
-            tao::event::Event::MenuEvent {
+        if let tao::event::Event::MenuEvent {
                 menu_id: tao::menu::MenuId(1),
                 ..
-            } => {
-                *control_flow = ControlFlow::Exit;
-            }
-            _ => {}
+            } = event {
+            *control_flow = ControlFlow::Exit;
         }
     });
 }

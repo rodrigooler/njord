@@ -1,13 +1,16 @@
 use reqwest::Client;
 use std::time::Duration;
 
+const CONNECTIVITY_URL: &str = "https://www.apple.com/library/test/success.html";
+const CONNECTIVITY_TIMEOUT_SECS: u64 = 5;
+
 pub async fn check_connectivity() -> bool {
     let client = Client::builder()
-        .timeout(Duration::from_secs(5))
+        .timeout(Duration::from_secs(CONNECTIVITY_TIMEOUT_SECS))
         .build()
-        .unwrap();
+        .expect("Failed to build HTTP client");
     match client
-        .get("https://www.apple.com/library/test/success.html")
+        .get(CONNECTIVITY_URL)
         .send()
         .await
     {
@@ -31,14 +34,14 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn test_check_connectivity_timeout() {
-        // Test with a non-existent domain to simulate failure
+    async fn test_check_connectivity_failure() {
+        // Test with an invalid URL to simulate failure
         let client = Client::builder()
-            .timeout(Duration::from_millis(1)) // Very short timeout
+            .timeout(Duration::from_secs(1))
             .build()
-            .unwrap();
+            .expect("Failed to build test HTTP client");
         let result = client
-            .get("https://www.apple.com/library/test/success.html")
+            .get("https://invalid-domain-that-does-not-exist.example")
             .send()
             .await;
         assert!(result.is_err());
