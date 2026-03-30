@@ -8,9 +8,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Initial macOS implementation with system tray and notifications
-- Polling-based connectivity monitoring
-- Basic project structure and documentation
+- Event-driven monitoring for macOS (NWPathMonitor)
+- Linux and Windows support
+- Configuration file support
+- Improved detection algorithms
+
+## [0.1.1] - 2024-01-02
+
+### Changed
+- Improved error handling with descriptive expect messages
+- Added configuration constants for URL, timeout, and monitoring interval
+- Enhanced test reliability with proper failure simulation
+- Code quality improvements: fixed Clippy warnings, applied rustfmt
+
+### Fixed
+- Removed unwrap() calls that could cause panics
+- Better mutex lock error handling
+- More robust connectivity testing
 
 ## [0.1.0] - 2024-01-01
 
