@@ -6,7 +6,11 @@ pub async fn check_connectivity() -> bool {
         .timeout(Duration::from_secs(5))
         .build()
         .unwrap();
-    match client.get("https://www.apple.com/library/test/success.html").send().await {
+    match client
+        .get("https://www.apple.com/library/test/success.html")
+        .send()
+        .await
+    {
         Ok(resp) => resp.status().is_success(),
         Err(_) => false,
     }
@@ -33,7 +37,10 @@ mod tests {
             .timeout(Duration::from_millis(1)) // Very short timeout
             .build()
             .unwrap();
-        let result = client.get("https://www.apple.com/library/test/success.html").send().await;
+        let result = client
+            .get("https://www.apple.com/library/test/success.html")
+            .send()
+            .await;
         assert!(result.is_err());
     }
 }

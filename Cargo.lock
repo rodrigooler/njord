@@ -1496,7 +1496,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "network-monitor"
+name = "njord"
 version = "0.1.0"
 dependencies = [
  "core-foundation 0.9.4",

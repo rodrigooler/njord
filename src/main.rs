@@ -1,11 +1,11 @@
+use njord::connectivity::check_connectivity;
+use notify_rust::Notification;
 use std::sync::{Arc, Mutex};
 use tao::event_loop::{ControlFlow, EventLoop};
 use tao::menu::{ContextMenu, MenuItemAttributes};
 use tao::system_tray::{Icon, SystemTrayBuilder};
-use notify_rust::Notification;
 use tokio::runtime::Runtime;
-use tokio::time::{sleep, Duration};
-use network_monitor::connectivity::check_connectivity;
+use tokio::time::{Duration, sleep};
 
 fn main() {
     let event_loop = EventLoop::new();
@@ -31,7 +31,11 @@ fn main() {
                 let mut conn = is_connected_clone.lock().unwrap();
                 if *conn != connected {
                     *conn = connected;
-                    let summary = if connected { "Network connected" } else { "Network disconnected" };
+                    let summary = if connected {
+                        "Network connected"
+                    } else {
+                        "Network disconnected"
+                    };
                     Notification::new()
                         .summary(summary)
                         .body("Internet connectivity status changed")
@@ -47,12 +51,13 @@ fn main() {
         *control_flow = ControlFlow::Wait;
 
         match event {
-            tao::event::Event::MenuEvent { menu_id, .. } if menu_id == tao::menu::MenuId(1) => {
+            tao::event::Event::MenuEvent {
+                menu_id: tao::menu::MenuId(1),
+                ..
+            } => {
                 *control_flow = ControlFlow::Exit;
             }
             _ => {}
         }
     });
 }
-
-
